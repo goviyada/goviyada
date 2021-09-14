@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
 
   successMessage:string =""
 
   regForm!:FormGroup
-
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -23,7 +22,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  register(){
+  register()
+  {
     this.successMessage = "Successfully Registered..."
     // console.log(this.regForm)
   }

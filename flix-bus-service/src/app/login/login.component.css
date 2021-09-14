@@ -1,3 +1,4 @@
+
 input{
     border:none;
     background-color: rgba(255,255,255,0);
@@ -17,7 +18,7 @@ form{
     padding:12px;
 }
 
-#submitButton{
+#loginButton{
     margin: 25px;
     width: 40%;
 }

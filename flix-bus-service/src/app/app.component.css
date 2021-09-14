@@ -1,7 +1,7 @@
 #appContainer{
     height: 100%;
     width: 100%;
-    background-image: linear-gradient(to right, rgba(251,194,235,1), rgba(179,202,243,1));
+    background-image: linear-gradient(to bottom, rgb(49, 184, 224), rgba(179,202,243,1));
 }
 
 #cardStyle{

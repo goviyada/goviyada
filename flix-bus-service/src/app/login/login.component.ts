@@ -1,5 +1,9 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegistrationService } from '../services/registration.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-login',
@@ -7,20 +11,30 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  successMessage:string ="";
-  loginForm!: FormGroup; 
-  constructor(private fb: FormBuilder) { }
+  user = new User;
+  msg = '';
+  constructor(private _service:RegistrationService,private _rout:Router) { }
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      email:['',[Validators.required, Validators.pattern("[A-Za-z0-9]*@gmail.com")]],
-      password:['',[Validators.required,Validators.pattern("[A-Za-z0-9@!_]{6,}")]]
-    })
   }
 
-   login(){
-     this.successMessage="Successfully Loggined In..."
-   }
+  loginUser()
+  {
+    this._service.loginUserFromRemote(this.user).subscribe(
+      data => {
+        console.log("response recieved");
+      },
+      error =>{
+        console.log("exception occured");
+        this.msg = "Bad , Please Enter valid email id and password";
+      } 
+    );
+  }
+
+  gotoRegistrationPage()
+  {
+    this._rout.navigate(['/registeration']);
+    console.log("hello Govnd");
+  }
 
 }
