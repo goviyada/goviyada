@@ -6,8 +6,6 @@
           <div>
             <button class="btn" [class.btn-light]="flag" type="button" style="width: 50%;" (click)="apply('login')" >Login</button>
             <button class="btn" [class.btn-light]="!flag" type="button" style="width: 50%;" (click)="apply('reg')" >Register</button>
-          </div>
-  
           <div class="card-body">
             <div *ngIf="flag">
               <app-login></app-login>
@@ -17,8 +15,11 @@
               <app-registration></app-registration>
   
             </div>
-  
+
           </div>
+          
+  
+         
   
         </div>
   

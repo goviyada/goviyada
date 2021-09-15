@@ -6,7 +6,7 @@
     <form #loginForm="ngForm" (ngSubmit)="loginUser()">
       <div class="form-group">
         <label for="email" class='fa fa-envelope'></label>
-          <input type="email"  placeholder="Enter email" name="email" [(ngModel)]="user.emailId"    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel" required
+          <input type="email"  placeholder="Enter email" name="email" [(ngModel)]="user.emailId"   #email="ngModel" required
           [class.is-invalid]="email.invalid && email.touched">
          <div *ngIf="email.errors && (email.invalid && email.touched)">
           <small class="text-danger" *ngIf="email.errors['required']">* Email Id is required</small>
@@ -28,5 +28,5 @@
       </div>
     </form>
     <!-- <small class="float-right" (click)="gotoRegistrationPage()">New User ? Register here</small> -->
-    <small class="btn btn-link" [routerLink]="['/forgetPassword']">Forget password</small>
+    <small class="btn btn-link" [routerLink]="'loginsuccess'">Forget password</small>
   </div>
