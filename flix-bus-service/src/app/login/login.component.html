@@ -1,32 +1,88 @@
-<div>
-  <small class="text-danger">{{msg}}</small>
-</div>
+<div class="form-box">
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form [formGroup]="regForm" (ngSubmit)="register()">
+        <h3>Create Account</h3>
+        <div class="social-container">
+          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+          <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your email for registration</span>
+        
+        <input type="text" placeholder="Name" class="fa fa-user" formControlName="name"/>
+        <small class="text-danger" style="font-size:0.6em"*ngIf="regForm.controls['name'].errors && regForm.controls['name'].touched">
+          Name is Required
+        </small>
+        
+        <input type="email"  placeholder="email" class='fa-envelope-open-o' formControlName="email"/>
+        <small class="text-danger" style="font-size:0.6em" *ngIf="regForm.controls['email'].errors && regForm.controls['email'].touched">
+          Invalid Email Address
+      </small>
+        
+        <input type="text" placeholder="Mobile No." class="fa fa-mobile-phone" formControlName="mobileNumber" />
+        <small class="text-danger" style="font-size:0.6em"*ngIf="regForm.controls['mobileNumber'].errors && regForm.controls['mobileNumber'].touched">
+          Invalid Mobile Number
+      </small>
 
-<div class="container">
-    <form #loginForm="ngForm" (ngSubmit)="loginUser()">
-      <div class="form-group">
-        <label for="email" class='fa fa-envelope'></label>
-          <input type="email"  placeholder="Enter email" name="email" [(ngModel)]="user.emailId"   #email="ngModel" required
-          [class.is-invalid]="email.invalid && email.touched">
-         <div *ngIf="email.errors && (email.invalid && email.touched)">
+
+        <input type="password" placeholder="Password" class="fa fa-lock" formControlName="password"/>
+        <small class="text-danger" style="font-size:0.6em" *ngIf="regForm.controls['password'].errors && regForm.controls['password'].touched">
+          Atleast 6 character Password is Required
+      </small>
+      <div>
+        <button>Sign Up</button>
+      </div>
+       
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form #loginForm="ngForm" (ngSubmit)="loginUser()">
+        <h1>Sign in</h1>
+        <div class="social-container">
+          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+          <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your account</span>
+       
+        <input type="email" placeholder="&#61447;" name="email" class='fa fa-envelope' [(ngModel)]="user.emailId"   #email="ngModel" required
+        [class.is-invalid]="email.invalid && email.touched">
+        <div *ngIf="email.errors && (email.invalid && email.touched)">
           <small class="text-danger" *ngIf="email.errors['required']">* Email Id is required</small>
           <small class="text-danger" *ngIf="email.errors['pattern']">* Enter valid email Id</small>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="password" class="fa fa-lock"></label>
-            
-          <input type="password"  placeholder="Enter password" name="pwd" [(ngModel)]="user.password" required #password="ngModel"
-          [class.is-invalid]="password.invalid && password.touched" >
-         
-          <small class="text-danger" [class.d-none]="password.valid || password.untouched">* Password is required</small>
+        <input type="password" placeholder="&#xf023;" class="fa fa-lock" name="pwd" [(ngModel)]="user.password" required #password="ngModel"
+        [class.is-invalid]="password.invalid && password.touched" />
+        <small class="text-danger" [class.d-none]="password.valid || password.untouched">* Password is required</small>
+        <a class="btn btn-link" [routerLink]="'/loginsuccess'">Forgot your password?</a>
+        <div>
+          <button class="fas fa-unlock fa-5x"></button>
         </div>
-      <div class="form-group">        
-        <div class="text-center">
-          <button id="loginButton" type="submit" [disabled]="loginForm.invalid" class="btn btn-info">Login</button>
+
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="ghost" id="signIn" (click)="signIn()">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start journey with us</p>
+          <button class="ghost" id="signUp" (click)="signUp()">Sign Up</button>
         </div>
       </div>
-    </form>
-    <!-- <small class="float-right" (click)="gotoRegistrationPage()">New User ? Register here</small> -->
-    <small class="btn btn-link" [routerLink]="'loginsuccess'">Forget password</small>
+    </div>
   </div>
+</div>
+<footer>
+  <p>
+    Created with <i class="fa fa-heart"></i> by
+    <a target="_blank" href="https://www.linkedin.com/in/goviyada/">Govind Yadav</a>
+    - Read how I created this and how you can join the challenge
+    <a target="_blank" href="https://github.com/goviyada/goviyada/tree/main/flix-bus-service#readme">here</a>.
+  </p>
+</footer>

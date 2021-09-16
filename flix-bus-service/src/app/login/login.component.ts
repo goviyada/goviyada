@@ -1,10 +1,11 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
-import { NgForm,FormGroup } from '@angular/forms';
+import { NgForm,FormGroup ,FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../services/registration.service';
 import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,26 @@ import { AuthenticationService } from '../services/authentication.service';
 export class LoginComponent implements OnInit {
   user = new User;
   msg = '';
-  constructor(private registrationService:RegistrationService,private router:Router,private authService:AuthenticationService) { 
+
+  successMessage:string =""
+
+  regForm!:FormGroup
+
+
+  constructor(private registrationService:RegistrationService,private router:Router,private authService:AuthenticationService,private fb: FormBuilder) { 
     if (this.authService.currentUserValue) { 
       this.router.navigate(['/']);
   }
   }
 
   ngOnInit(): void {
+
+    this.regForm = this.fb.group({
+      name: ['',[Validators.required]],
+      mobileNumber: ['',[Validators.required, Validators.min(1000000000),Validators.max(9999999999)]],
+      email:['',[Validators.required, Validators.pattern("[a-zA-Z0-9]*@gmail.com")]],
+      password: ['',[Validators.required,Validators.pattern("[a-zA-z@_]{6,}")]]
+    })
   }
 
 
@@ -47,5 +61,24 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/loginsuccess']);
     console.log("hello Govnd");
   }
+
+  signUp() {
+    const container= document.getElementById('container');
+    container!.classList.add('right-panel-active');
+    localStorage.removeItem('currentUser');
+}
+signIn() {
+  const container = document.getElementById('container');
+  container!.classList.remove('right-panel-active');
+  localStorage.removeItem('currentUser');
+}
+
+
+register()
+  {
+    this.successMessage = "Successfully Registered..."
+    // console.log(this.regForm)
+  }
+
 
 }
